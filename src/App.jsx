@@ -51,6 +51,10 @@ function App() {
     setError('');
   };
 
+  const handleDelete = (recordedDate) => {
+    setSteps(steps.filter((step) => step.recordedDate !== recordedDate));
+  };
+
   return (
     <div className='app'>
       <h1>歩数登録アプリ</h1>
@@ -73,7 +77,11 @@ function App() {
 
       <ul className='step-list'>
         {steps.map((step) => (
-          <Step key={step.recordedDate} step={step} />
+          <Step
+            key={step.recordedDate}
+            step={step}
+            handleDelete={handleDelete}
+          />
         ))}
       </ul>
     </div>
