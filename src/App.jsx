@@ -2,17 +2,7 @@ import { useState } from 'react';
 
 import { Step } from './components/Step';
 import './App.css';
-
-const dailySteps = [
-  {
-    recordedDate: '2026-03-26',
-    stepCount: 1234,
-  },
-  {
-    recordedDate: '2026-03-27',
-    stepCount: 5678,
-  },
-];
+import stepData from './data/steps.json';
 
 function getYYYYMMDD() {
   const now = new Date();
@@ -24,7 +14,7 @@ function getYYYYMMDD() {
 
 function App() {
   const [input, setInput] = useState(0);
-  const [steps, setSteps] = useState(dailySteps);
+  const [steps, setSteps] = useState(stepData);
   const [error, setError] = useState('');
 
   const handleRegister = () => {

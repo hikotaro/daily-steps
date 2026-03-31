@@ -3,7 +3,9 @@ export const Step = ({ step, handleDelete }) => {
 
   return (
     <li>
-      {step.recordedDate} {formattedStepCount}歩
+      <span>
+        {step.recordedDate} {formattedStepCount}歩
+      </span>
       <button onClick={() => handleDelete(step.recordedDate)}>削除</button>
     </li>
   );
