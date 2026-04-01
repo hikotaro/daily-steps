@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Step } from './components/Step';
 import './App.css';
-import stepData from './data/steps.json';
 
 function getYYYYMMDD() {
   const now = new Date();
@@ -14,8 +13,23 @@ function getYYYYMMDD() {
 
 function App() {
   const [input, setInput] = useState(0);
-  const [steps, setSteps] = useState(stepData);
+
+  const [steps, setSteps] = useState(() => {
+    const savedSteps = localStorage.getItem('stepData');
+    if (savedSteps) {
+      // localStorageにデータがあればそれを返す
+      return JSON.parse(savedSteps);
+    }
+    // localStorageが空（初回アクセス時など）の場合は空の配列を返す
+    return [];
+  });
+
   const [error, setError] = useState('');
+
+  // stepsが更新されるたびにlocalStorageに保存する
+  useEffect(() => {
+    localStorage.setItem('stepData', JSON.stringify(steps));
+  }, [steps]);
 
   const handleRegister = () => {
     const step = Number(input);
